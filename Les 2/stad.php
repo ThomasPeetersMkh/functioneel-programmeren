@@ -23,33 +23,20 @@
 
 </head>
 <body>
-
-<?php
-$afbeeldingen = [
-    "londen" => "londen.jpg",
-    "parijs" => "parijs.jpg",
-    "berlijn" => "berlijn.jpg",
-]
-?>
-
 <div class="jumbotron text-center">
-    <h1>Leuke plekken in Europa</h1>
-    <p>Resize this responsive page to see the effect!</p>
+    <h1>Detail Stad</h1>
+</div>
+<div class="city">
+    <?php
+    include "../dataRetrieval.php";
+    foreach (GetData("select * from images where img_id = " . $_GET['img_id'],"steden") as $detail) {
+        print "<h3>" . $detail["img_title"] . "</h3>";
+        print "<p>" . $detail["img_width"] . " x " . $detail["img_height"];
+        print "<img src=../images/" . $detail["img_filename"] . " width='800px' height='auto' display='block'>";
+        print "<br><a href='steden2.php'>Terug naar overzicht</a>";
+    }
+    ?>
 </div>
 
-<div class="container">
-    <div class="row">
-        <?php
-        foreach ($afbeeldingen as $stad => $foto) {
-            print "<div class='col-sm-4'>";
-            print "<h3 text-transform: capitalize;>$stad</h3>";
-            print "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>";
-            print "<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>";
-            print "<img src=img/$foto width='300' height='300'>";
-            print "</div>";
-        }
-        ?>
-    </div>
-</div>
 </body>
 </html>

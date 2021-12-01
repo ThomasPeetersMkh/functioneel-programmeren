@@ -25,12 +25,28 @@
 <body>
 
 <?php
-$afbeeldingen = [
-    "londen" => "londen.jpg",
-    "parijs" => "parijs.jpg",
-    "berlijn" => "berlijn.jpg",
-]
+function GetData($query,$dbname){
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+
+// Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+//define and execute query
+    $result = $conn->query($query);
+    $conn->close();
+    return $result;
+}
+
 ?>
+
+
 
 <div class="jumbotron text-center">
     <h1>Leuke plekken in Europa</h1>
@@ -40,12 +56,15 @@ $afbeeldingen = [
 <div class="container">
     <div class="row">
         <?php
-        foreach ($afbeeldingen as $stad => $foto) {
+
+        foreach (GetData("select * from images","steden") as $row){
             print "<div class='col-sm-4'>";
-            print "<h3 text-transform: capitalize;>$stad</h3>";
+            print "<h3>".$row["img_title"]."</h3>";
+            print "<p>".$row["img_width"]. " x " . $row["img_height"];
             print "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>";
             print "<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>";
-            print "<img src=img/$foto width='300' height='300'>";
+            print "<img src=../images/".$row["img_filename"]." width='300' height='300'>";
+            print "<br><a href='#'>meer info </a>";
             print "</div>";
         }
         ?>
