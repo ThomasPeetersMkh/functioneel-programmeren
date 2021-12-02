@@ -31,7 +31,7 @@
 <div class="container">
     <div class="row">
         <?php
-        include "../dataRetrieval.php";
+        require_once "../dataRetrieval.php";
         foreach (GetData("select * from images","steden") as $row){
             print "<div class='col-sm-4'>";
             print "<h3>".$row["img_title"]."</h3>";

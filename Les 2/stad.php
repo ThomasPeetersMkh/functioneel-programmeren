@@ -28,7 +28,7 @@
 </div>
 <div class="city">
     <?php
-    include "../dataRetrieval.php";
+    require_once "../dataRetrieval.php";
     foreach (GetData("select * from images where img_id = " . $_GET['img_id'],"steden") as $detail) {
         print "<h3>" . $detail["img_title"] . "</h3>";
         print "<p>" . $detail["img_width"] . " x " . $detail["img_height"];
