@@ -17,4 +17,15 @@ function GetData($query,$dbname){
     $conn->close();
     return $result;
 }
+
+function printHead(){
+    print file_get_contents('C:\xampp\htdocs\functioneel\les3\head.html');
+}
+
+function printJumbo($title,$subtitle){
+    $jumbo = file_get_contents('C:\xampp\htdocs\functioneel\templates\jumbo.html');
+    $jumbo =str_replace('@@title@@',$title,$jumbo);
+    $jumbo =str_replace('@@text@@',$subtitle,$jumbo);
+    print $jumbo;
+}
 ?>
